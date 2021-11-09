@@ -5,7 +5,7 @@ const User = require('../models/user.model');
 
 const updateProfile = async (req, res, next) => {
   try {
-    const { name, email, password, description, schedule, price } = req.body.inputs;
+    const { name, email, password } = req.body.userData;
     const { url, token } = req.body;
     const userExists = await User.findOne({ email });
     if (userExists) {
@@ -28,7 +28,6 @@ const updateProfile = async (req, res, next) => {
         {
           exp: Math.floor(Date.now() / 1000) + 15 * 24 * 60 * 60,
           userId: newUserData._id,
-          type,
           userData: newUserData,
         },
         process.env.JWT_SECRET,
