@@ -7,7 +7,9 @@
   "author": "Cesar-M-Diaz <arq.cmdiaz1@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "run test"
+    "start": "node server.js",
+    "test": "run test",
+    "nodemon": "nodemon server.js"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.5.0",
