@@ -4,6 +4,7 @@ const Controller = require('../controllers/updateProfile.controller');
 const registerController = require('../controllers/register.controller');
 const User = require('../controllers/user.controller');
 const loginController = require('../controllers/login.controller');
+const questionController = require('../controllers/question.controller');
 
 const app = express.Router();
 
@@ -11,6 +12,7 @@ app.post('/register', registerController.createUser);
 app.post('/login', loginController.login);
 app.get('/login', User.getUserData);
 app.patch('/update', Controller.updateProfile);
+app.post('/create-question', questionController.createQuestion);
 
 bb.extend(app, {
   upload: true,
