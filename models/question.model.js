@@ -9,8 +9,8 @@ const questionSchema = mongoose.Schema(
     option_3: { type: String, required: true },
     title: { type: String, required: true },
     explanation: { type: String, required: true },
-    category: { type: String, required: true },
-    difficulty: { type: String, required: true },
+    technology: { type: String, required: true },
+    level: { type: String, required: true },
     user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   },
   {
