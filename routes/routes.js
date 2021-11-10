@@ -14,6 +14,7 @@ app.post('/login', loginController.login);
 app.get('/login', User.getUserData);
 app.patch('/update', Controller.updateProfile);
 app.post('/question', questionController.createQuestion);
+app.get('/question', questionController.getQuestions);
 app.post('/session', sessionController.createSession);
 app.put('/session', sessionController.editSession);
 app.get('/session/:id', sessionController.getSessionData);
