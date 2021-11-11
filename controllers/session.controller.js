@@ -61,7 +61,10 @@ const getSessionData = async (req, res) => {
 
 const getCompletedSessions = async (req, res) => {
   try {
-    const sessions = await Session.find({ user_id: req.params.id, status: 'finished' });
+    const sessions = await Session.find({ user_id: req.params.id, status: 'finished' }).sort({
+      createdAt: -1,
+    });
+
     res.status(200).json({ sessions });
   } catch (err) {
     console.log(err);
