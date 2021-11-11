@@ -16,7 +16,8 @@ const createQuestion = async (req, res) => {
 
 const getQuestions = async (req, res) => {
   try {
-    const questions = await Question.find();
+    // get the last questions added
+    const questions = await Question.find().sort({ createdAt: -1 });
 
     // populate each question with the user who created it
     const populatedQuestions = await Promise.all(

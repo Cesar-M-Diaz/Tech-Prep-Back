@@ -18,6 +18,7 @@ app.get('/question', questionController.getQuestions);
 app.post('/session', sessionController.createSession);
 app.put('/session', sessionController.editSession);
 app.get('/session/:id', sessionController.getSessionData);
+app.get('/sessions/:id', sessionController.getCompletedSessions);
 
 bb.extend(app, {
   upload: true,

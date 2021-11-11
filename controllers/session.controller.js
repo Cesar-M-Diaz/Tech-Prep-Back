@@ -27,7 +27,7 @@ const editSession = async (req, res) => {
     const wrong = Object.keys(data.answers).filter((key) => data.answers[key] === 'wrong');
 
     const updatedSessionData = await Session.updateOne(
-      { _id: data._id },
+      { _id: data.id },
       {
         correct_answers: [...correct],
         wrong_answers: [...wrong],
@@ -35,7 +35,7 @@ const editSession = async (req, res) => {
       },
     );
 
-    const updatedSession = await Session.findOne({ _id: data._id });
+    const updatedSession = await Session.findOne({ _id: data.id });
 
     res.status(200).json({ updatedSession, updatedSessionData });
   } catch (err) {
@@ -59,4 +59,14 @@ const getSessionData = async (req, res) => {
   }
 };
 
-module.exports = { createSession, editSession, getSessionData };
+const getCompletedSessions = async (req, res) => {
+  try {
+    const sessions = await Session.find({ user_id: req.params.id, status: 'finished' });
+    res.status(200).json({ sessions });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: err });
+  }
+};
+
+module.exports = { createSession, editSession, getSessionData, getCompletedSessions };
