@@ -14,6 +14,56 @@ const createQuestion = async (req, res) => {
   }
 };
 
+const updateQuestion = async (req, res) => {
+  try {
+    const data = req.body;
+
+    const question = await Question.find({ _id: req.params.id });
+
+    const updatedQuestion = await Question.updateOne(
+      { _id: req.params.id },
+      {
+        question: data.question || question.question,
+        answer: data.answer || question.answer,
+        option_1: data.option_1 || question.option_1,
+        option_2: data.option_2 || question.option_2,
+        option_3: data.option_3 || question.option_3,
+        title: data.title || question.title,
+        explanation: data.explanation || question.explanation,
+        technology: data.technology || question.technology,
+        level: data.level || question.level,
+      },
+    );
+
+    res.status(201).json(updatedQuestion);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+};
+
+const deleteQuestion = async (req, res) => {
+  try {
+    const response = await Question.deleteOne({ _id: req.params.id });
+    console.log(response);
+
+    res.status(201).json(response);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+};
+
+const getQuestion = async (req, res) => {
+  try {
+    const question = await Question.findOne({ _id: req.params.id });
+    res.status(201).json(question);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+};
+
 const getQuestions = async (req, res) => {
   try {
     // get the last questions added
@@ -36,4 +86,4 @@ const getQuestions = async (req, res) => {
   }
 };
 
-module.exports = { createQuestion, getQuestions };
+module.exports = { createQuestion, getQuestions, getQuestion, updateQuestion, deleteQuestion };
