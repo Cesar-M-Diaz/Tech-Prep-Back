@@ -64,6 +64,16 @@ const getQuestion = async (req, res) => {
   }
 };
 
+const getQuestionsByUser = async (req, res) => {
+  try {
+    const questions = await Question.find({ user_id: req.params.id });
+    res.status(201).json(questions);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+};
+
 const getQuestions = async (req, res) => {
   try {
     // get the last questions added
@@ -86,4 +96,11 @@ const getQuestions = async (req, res) => {
   }
 };
 
-module.exports = { createQuestion, getQuestions, getQuestion, updateQuestion, deleteQuestion };
+module.exports = {
+  createQuestion,
+  getQuestions,
+  getQuestion,
+  updateQuestion,
+  deleteQuestion,
+  getQuestionsByUser,
+};

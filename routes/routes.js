@@ -15,6 +15,7 @@ app.get('/login', User.getUserData);
 app.patch('/update', Controller.updateProfile);
 app.post('/question', questionController.createQuestion);
 app.get('/question', questionController.getQuestions);
+app.get('/questions/:id', questionController.getQuestionsByUser);
 app.get('/question/:id', questionController.getQuestion);
 app.put('/question/:id', questionController.updateQuestion);
 app.delete('/question/:id', questionController.deleteQuestion);
