@@ -5,7 +5,6 @@ const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const userAuth = await User.authenticate(email, password);
-    let user = null;
     if (userAuth) {
       const token = jwt.sign(
         {
@@ -15,15 +14,12 @@ const login = async (req, res, next) => {
         },
         process.env.JWT_SECRET,
       );
-      user = { token, userData: userAuth };
-    } else {
-      res.status(404).send('Not found');
-      return;
+      const user = { token, userData: userAuth };
+      res.json(user);
     }
-    res.json(user);
     next();
   } catch (error) {
-    res.status(500).send('server error');
+    res.status(404).send('Not found');
     next(error);
   }
 };
