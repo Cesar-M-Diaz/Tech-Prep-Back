@@ -66,7 +66,7 @@ const getQuestion = async (req, res) => {
 
 const getQuestionsByUser = async (req, res) => {
   try {
-    const questions = await Question.find({ user_id: req.params.id });
+    const questions = await Question.find({ user_id: req.params.id }).sort({ createdAt: -1 });
     res.status(201).json(questions);
   } catch (err) {
     console.log(err);
